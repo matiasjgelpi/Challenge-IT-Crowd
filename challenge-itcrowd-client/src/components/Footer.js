@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
   return (
@@ -7,12 +8,20 @@ export default function NavBar() {
         backgroundColor: "pink",
         display: "flex",
         justifyContent: "end",
-        padding: "5px"
+        padding: "5px",
       }}
       color="secondary"
       position="static"
     >
-      <h1>Itcrowd</h1>
+      <Link
+        style={{
+          textDecoration: "none",
+          color: "white",
+        }}
+        to="/"
+      >
+        <h1>Itcrowd cellphones</h1>
+      </Link>
     </Box>
   );
 }

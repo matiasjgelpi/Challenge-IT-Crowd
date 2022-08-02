@@ -1,13 +1,18 @@
 import './App.css';
 import MainPage from './components/MainPage';
+import ProductDetail from './components/ProductDetail';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import { Routes, Route} from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
       <NavBar></NavBar>
-      <MainPage></MainPage>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/detail/" element={<ProductDetail />} />
+      </Routes>
       <Footer></Footer>
     </div>
   );

@@ -6,14 +6,22 @@ import {
   Button,
   Typography,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductCard({name}) {
+
+    const navigator = useNavigate();
+
+    const handleClick = () => {
+        navigator("/detail/");
+        
+    }
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         height="140"
-        image="/static/images/cards/contemplative-reptile.jpg"
+        image="https://www.rd.com/wp-content/uploads/2021/04/GettyImages-145679137-scaled-e1619025176434.jpg?resize=2048,1365"
         alt="green iguana"
       />
       <CardContent>
@@ -27,7 +35,7 @@ export default function ProductCard({name}) {
       </CardContent>
       <CardActions>
         <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small" onClick={handleClick}>Learn More</Button>
       </CardActions>
     </Card>
   );
