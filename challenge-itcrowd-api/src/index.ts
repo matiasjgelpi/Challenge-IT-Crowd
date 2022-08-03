@@ -1,10 +1,7 @@
 import 'dotenv/config'
 import express from 'express'
-// import ProductModel from './database/models/productModel'
-// import cors from 'cors'
 import { connectDb } from './database/dbConnection'
-// import blogPostRoutes from './routes/BlogPostRoutes'
-import { postProduct, getAllProducts } from '../src/services/productServices'
+import ProductRoutes from './routes/product.routes'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cors = require('cors')
@@ -15,9 +12,11 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
-app.post('/', postProduct)
-app.get('/', getAllProducts)
+app.use('/', ProductRoutes)
+// app.post('/', productServices.postProduct)
+// app.get('/', productServices.getAllProducts)
+// app.delete('/:id', productServices.deleteProduct)
+// app.put('/:id', productServices.updateProduct)
 // app.use('/', blogPostRoutes)
 
 app.use('/', (_, res) => {
