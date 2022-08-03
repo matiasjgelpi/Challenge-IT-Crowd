@@ -1,8 +1,10 @@
 import 'dotenv/config'
 import express from 'express'
+// import cors from 'cors'
 // import { connectDb } from './database/dbConnection'
 // import blogPostRoutes from './routes/BlogPostRoutes'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const cors = require('cors')
 
 // connectDb()
