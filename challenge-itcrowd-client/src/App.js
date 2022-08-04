@@ -13,8 +13,10 @@ function App() {
       <NavBar></NavBar>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/detail/:id" element={<ProductDetail />} />
-        <Route path="/admin" element={<AdminPage />} />
+        <Route path="detail/:id" element={<ProductDetail />} />
+        <Route path="admin/Edit/Delete" element={<AdminPage />} />
+        <Route path="admin/AddProduct" element={<AdminPage />}/>
+        <Route path="admin/AddBrand" element={<AdminPage />}/>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer></Footer>

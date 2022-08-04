@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Paper, Typography, Box } from "@mui/material";
-// import { borderRadius } from "@mui/system";
 import { useParams } from "react-router-dom";
 import { getProductDetail } from "../redux/productSlice";
 import { useDispatch, useSelector } from "react-redux";

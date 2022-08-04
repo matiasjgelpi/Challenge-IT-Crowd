@@ -18,8 +18,7 @@ export default function BrandForm() {
     console.log("submit");
   };
 
-  console.log(inputs);
-  const handleChange = (e) => {
+   const handleChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
     setErrors(validateBrand(inputs));
   };

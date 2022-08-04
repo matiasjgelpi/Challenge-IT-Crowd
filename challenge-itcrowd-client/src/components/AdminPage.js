@@ -1,21 +1,20 @@
-import {
-  Paper,
-  Typography,
-
-} from "@mui/material";
+import { Paper, Box, Button } from "@mui/material";
 import ProductForm from "./ProductForm";
-// import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
 import BrandForm from "./BrandForm";
+import { useLocation, useNavigate } from "react-router-dom";
+import EditDeletePage from "./EditDeletePage";
 
 export default function AdminPage() {
-  //   let products = useSelector((state) => state.products.products);
-  //   const dispatch = useDispatch();
+  const navItems = ["Edit / Delete", "Add Product", "Add Brand"];
+  const location = useLocation();
+  const navigator = useNavigate();
 
+  console.log(location);
 
-  //   useEffect(() => {
-  //     dispatch(getAllProducts());
-  //   }, []);
+  const handleClick = (item) => {
+    const routeItem = item.split(" ").join("");
+    navigator(`/admin/${routeItem}`);
+  };
 
   return (
     <Paper
@@ -25,23 +24,49 @@ export default function AdminPage() {
         backgroundColor: "lightblue",
         tranparent: true,
         margin: "1rem",
-        padding: "0 10% 0 10%",
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "center",
       }}
     >
-      {/* <Typography
-        variant="h4"
-        textAlign="start"
-        width="90vw"
-        margin="1rem 0 2rem 0"
+      <Box
+        sx={{
+          width: "100%",
+          maxHeight: "5rem",
+          minHeight: "5rem",
+          display: "flex",
+          backgroundColor: "white",
+          color: "black",
+          opacity: "0.5",
+          justifyContent: "center",
+        }}
       >
-        Products:
-      </Typography> */}
+        {navItems.map((item) => (
+          <Button
+            key={item}
+            sx={{
+              color: "black",
+              fontWeight: "900",
+            }}
+            onClick={() => handleClick(item)}
+          >
+            {item}
+          </Button>
+        ))}
+      </Box>
 
-      <ProductForm />
-      <BrandForm />
+      <Box
+        sx={{
+          width: "75vw",
+        }}
+      >
+        {location.pathname === "/admin/Edit/Delete" && <EditDeletePage />}
+        {location.pathname === "/admin/AddProduct" && <ProductForm />}
+        {location.pathname === "/admin/AddBrand" && <BrandForm />}
+      </Box>
+
+      {/* <ProductForm />
+      <BrandForm /> */}
     </Paper>
   );
 }

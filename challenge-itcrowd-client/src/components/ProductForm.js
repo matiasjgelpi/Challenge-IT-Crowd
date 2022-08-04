@@ -109,8 +109,6 @@ export default function ProductForm() {
         name="brand"
         value={inputs.brand}
         onChange={handleChange}
-        
-
         >
           {brands?.map((brand) => {
             return (
