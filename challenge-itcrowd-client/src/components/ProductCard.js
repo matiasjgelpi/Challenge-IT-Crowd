@@ -6,14 +6,15 @@ import {
   Button,
   Typography,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 
 export default function ProductCard({name}) {
 
     const navigator = useNavigate();
+    const {id} = useParams();
 
     const handleClick = () => {
-        navigator("/detail/");
+        navigator(`/detail/${id}`);
         
     }
   return (

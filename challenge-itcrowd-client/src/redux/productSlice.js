@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getAllProducts = createAsyncThunk("products/getAllProducts", async () => {
-  const response = await axios("https://pokeapi.co/api/v2/pokemon/");
-  return response.data.results;
+  const response = await axios("http://localhost:4000/products");
+  return response.data;
 });
 
 const productsSlice = createSlice({

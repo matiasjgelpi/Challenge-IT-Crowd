@@ -8,10 +8,10 @@ export default function MainPage() {
   let products = useSelector((state) => state.products.products);
   const dispatch = useDispatch();
 
-  console.log(products.length);
   useEffect(() => {
     dispatch(getAllProducts());
   }, []);
+
 
   return (
     <Paper
@@ -39,7 +39,7 @@ export default function MainPage() {
           padding: "1rem",
         }}
       >
-        {products[0]?.name === "bulbasaur" ? (
+        {products.length > 0 ? (
           products?.map((product) => <ProductCard name={product?.name} />)
         ) : (
           <h1>No products</h1>
