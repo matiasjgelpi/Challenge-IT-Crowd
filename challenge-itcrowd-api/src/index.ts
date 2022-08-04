@@ -2,6 +2,7 @@ import 'dotenv/config'
 import express from 'express'
 import { connectDb } from './database/dbConnection'
 import ProductRoutes from './routes/product.routes'
+import BrandRoutes from './routes/brand.routes'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cors = require('cors')
@@ -13,11 +14,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/', ProductRoutes)
-// app.post('/', productServices.postProduct)
-// app.get('/', productServices.getAllProducts)
-// app.delete('/:id', productServices.deleteProduct)
-// app.put('/:id', productServices.updateProduct)
-// app.use('/', blogPostRoutes)
+app.use('/', BrandRoutes)
 
 app.use('/', (_, res) => {
   return res.status(404).send({ msg: 'resource not found' })
