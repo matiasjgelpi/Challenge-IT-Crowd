@@ -6,7 +6,7 @@ import {
   Button,
   Typography,
 } from "@mui/material";
-import { useNavigate, useParams} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 export default function ProductCard({name, id}) {
 
@@ -34,8 +34,7 @@ export default function ProductCard({name, id}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small" onClick={handleClick}>Learn More</Button>
+        <Button size="small" onClick={handleClick}>See More</Button>
       </CardActions>
     </Card>
   );

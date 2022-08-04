@@ -12,12 +12,11 @@ export default function MainPage() {
     dispatch(getAllProducts());
   }, []);
 
-
   return (
     <Paper
       elevation={3}
       sx={{
-        // height: "85vh",
+        minHeight: "85vh",
         backgroundColor: "lightblue",
         tranparent: true,
         margin: "1rem",
@@ -25,22 +24,27 @@ export default function MainPage() {
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "center",
-        gap: "1rem",
       }}
     >
-      <Typography variant="h3" textAlign="start" width="100%">
+      <Typography
+        variant="h4"
+        textAlign="start"
+        width="90vw"
+        margin="1rem 0 2rem 0"
+      >
         Products:
       </Typography>
       <Box
         sx={{
           display: "flex",
           flexWrap: "wrap",
-          justifyContent: "space-around",
-          padding: "1rem",
+          gap: "1rem",
         }}
       >
         {products.length > 0 ? (
-          products?.map((product) => <ProductCard name={product?.name} id={product.id} />)
+          products?.map((product) => (
+            <ProductCard name={product?.name} id={product.id} />
+          ))
         ) : (
           <h1>No products</h1>
         )}

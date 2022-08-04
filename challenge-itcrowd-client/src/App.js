@@ -3,6 +3,8 @@ import MainPage from './components/MainPage';
 import ProductDetail from './components/ProductDetail';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import PageNotFound from './components/PageNotFound';
+import AdminPage from './components/AdminPage';
 import { Routes, Route} from 'react-router-dom';
 
 function App() {
@@ -12,6 +14,8 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/detail/:id" element={<ProductDetail />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer></Footer>
     </div>
