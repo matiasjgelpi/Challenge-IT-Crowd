@@ -53,7 +53,7 @@ export default function ProductForm() {
       <TextField
         name="name"
         fullWidth
-        error={errors.name}
+        error={errors.name !== undefined}
         helperText={errors?.name && errors?.name}
         variant="outlined"
         label="Name"
@@ -108,6 +108,7 @@ export default function ProductForm() {
         size="small"
         sx={{ width: "15%" }}
         onClick={(e) => handleSubmit(e)}
+        disabled={errors.isValid}
       >
         Add Product
       </Button>
@@ -116,6 +117,7 @@ export default function ProductForm() {
         size="small"
         sx={{ width: "15%" }}
         onClick={(e) => handleSubmit(e)}
+        disabled={errors.isValid}
       >
         Edit Product
       </Button>

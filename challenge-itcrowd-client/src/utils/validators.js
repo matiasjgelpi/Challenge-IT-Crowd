@@ -24,6 +24,12 @@ export const validateProduct = (inputs) => {
     errors.description = "Description is required";
   }
 
+  if (Object.keys(errors).length < 1) {
+    errors.isValid = false;
+  } else {
+    errors.isValid = true;
+  }
+
   return errors;
 };
 
@@ -43,6 +49,12 @@ export const validateBrand = (inputs) => {
     )
   ) {
     errors.logo_url = "Image Url is not valid";
+  }
+
+  if (Object.keys(errors).length < 1) {
+    errors.isValid = false;
+  } else {
+    errors.isValid = true;
   }
 
   return errors;

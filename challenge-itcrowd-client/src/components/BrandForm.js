@@ -68,6 +68,7 @@ export default function BrandForm() {
         size="small"
         sx={{ width: "20%" }}
         onClick={(e) => handleSubmit(e)}
+        disabled={errors.isValid}
       >
         Add Brand
       </Button>
@@ -76,6 +77,7 @@ export default function BrandForm() {
         size="small"
         sx={{ width: "20%" }}
         onClick={(e) => handleSubmit(e)}
+        disabled={errors.isValid}
       >
         Edit Brand
       </Button>
