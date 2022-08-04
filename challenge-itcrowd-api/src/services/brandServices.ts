@@ -4,7 +4,7 @@ const getAllBrands = (_req: any, res: any): any => {
   void (async () => {
     try {
       const brands = await BrandModel.find({})
-      return res.send(brands)
+      return res.json(brands)
     } catch (error: any) {
       return res.status(400).send({ msg: error.toString() })
     }
@@ -14,8 +14,8 @@ const getAllBrands = (_req: any, res: any): any => {
 const postBrand = (req: any, res: any): any => {
   void (async () => {
     try {
-      const product = await BrandModel.create(req.body)
-      return res.send(product)
+      const brand = await BrandModel.create(req.body)
+      return res.send(brand)
     } catch (error: any) {
       return res.status(400).send({ msg: error.toString() })
     }

@@ -6,6 +6,13 @@ const brandSchema = new Schema<Brand>({
   logo_url: { type: String, required: true }
 })
 
+brandSchema.set('toJSON', {
+  transform: (_doc, returnedObject) => {
+    returnedObject.id = returnedObject._id
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
 const BrandModel = model<Brand>('Brand', brandSchema)
 
 export default BrandModel

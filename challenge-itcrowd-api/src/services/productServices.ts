@@ -1,5 +1,6 @@
 import ProductModel from '../database/models/productModel'
 import BrandModel from '../database/models/brandModel'
+import { toNewProduct } from '../utils/parseProduct'
 
 const getAllProducts = (_req: any, res: any): any => {
   void (async () => {
@@ -18,7 +19,8 @@ const getAllProducts = (_req: any, res: any): any => {
 const postProduct = (req: any, res: any): any => {
   void (async () => {
     try {
-      const product = await ProductModel.create(req.body)
+      const verifiedProduct = toNewProduct(req.body)
+      const product = await ProductModel.create(verifiedProduct)
       return res.send(product)
     } catch (error: any) {
       return res.status(400).send({ msg: error.toString() })

@@ -9,6 +9,15 @@ const productSchema = new Schema<Product>({
   brand: { type: Schema.Types.ObjectId, ref: 'BrandModel' }
 })
 
+productSchema.set('toJSON', {
+  transform: (_doc, returnedObject) => {
+    returnedObject.id = returnedObject._id
+    delete returnedObject._id
+    delete returnedObject.__v
+    delete returnedObject?.brand?.id
+  }
+})
+
 const ProductModel = model<Product>('Product', productSchema)
 
 export default ProductModel
