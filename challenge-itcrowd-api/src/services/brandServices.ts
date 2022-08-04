@@ -13,6 +13,20 @@ const getAllBrands = (_req: any, res: any): any => {
   })()
 }
 
+const getBrand = (req: any, res: any): any => {
+  void (async () => {
+    try {
+      const { id } = req.params
+      parseIds(id, 'id')
+
+      const brand = await BrandModel.findById(id)
+      return res.send(brand)
+    } catch (error: any) {
+      return res.status(400).send({ msg: error.toString() })
+    }
+  })()
+}
+
 const postBrand = (req: any, res: any): any => {
   void (async () => {
     try {
@@ -58,6 +72,7 @@ const updateBrand = (req: any, res: any): any => {
 
 const brandServices = {
   getAllBrands,
+  getBrand,
   postBrand,
   deleteBrand,
   updateBrand

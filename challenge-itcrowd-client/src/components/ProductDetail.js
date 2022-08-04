@@ -1,9 +1,19 @@
+import { useEffect } from "react";
 import { Paper, Typography, Box } from "@mui/material";
-import { borderRadius } from "@mui/system";
+// import { borderRadius } from "@mui/system";
 import { useParams } from "react-router-dom";
+import { getProductDetail } from "../redux/productSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ProductDetail() {
   const { id } = useParams();
+  const product = useSelector((state) => state.products.productDetail);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProductDetail(id));
+  }, [])
+
   return (
     <Paper
       elevation={3}
@@ -21,7 +31,7 @@ export default function ProductDetail() {
       }}
     >
       <Typography variant="h3" textAlign="center" width="100%">
-        Product Name
+        {product?.name}
       </Typography>
       <Box
         sx={{

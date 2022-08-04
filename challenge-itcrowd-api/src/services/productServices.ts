@@ -34,6 +34,27 @@ const getProduct = (req: any, res: any): any => {
   })()
 }
 
+const getProductsByBrand = (req: any, res: any): any => {
+  void (async () => {
+    try {
+      const { brandId } = req.params
+      parseIds(brandId, 'brandId')
+
+      const products = await ProductModel.find({ brand: brandId }).populate({
+        path: 'brand',
+        model: BrandModel
+      })
+
+      if (products.length === 0) {
+        return res.status(400).send({ msg: 'No products with this brand found' })
+      }
+      return res.send(products)
+    } catch (error: any) {
+      return res.status(400).send({ msg: error.toString() })
+    }
+  })()
+}
+
 const postProduct = (req: any, res: any): any => {
   void (async () => {
     try {
@@ -79,6 +100,7 @@ const updateProduct = (req: any, res: any): any => {
 
 const productServices = {
   getAllProducts,
+  getProductsByBrand,
   getProduct,
   postProduct,
   deleteProduct,

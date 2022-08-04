@@ -8,10 +8,9 @@ import {
 } from "@mui/material";
 import { useNavigate, useParams} from "react-router-dom";
 
-export default function ProductCard({name}) {
+export default function ProductCard({name, id}) {
 
     const navigator = useNavigate();
-    const {id} = useParams();
 
     const handleClick = () => {
         navigator(`/detail/${id}`);
