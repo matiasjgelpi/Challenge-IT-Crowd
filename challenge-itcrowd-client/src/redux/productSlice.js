@@ -20,16 +20,29 @@ export const getProductDetail = createAsyncThunk(
 export const addNewProduct = createAsyncThunk(
   "products/addNewProduct",
   async (newProduct) => {
-    // const validProduct = {
-    //   ...newProduct,
-    //   price: parseInt(newProduct.price),
-    //   brand: "62eb3ebfa77da662b0aa6cff",
-    // };
-
     const response = await axios.post(
       `http://localhost:4000/product/`,
       newProduct
     );
+    return response.data;
+  }
+);
+
+export const editProduct = createAsyncThunk(
+  "products/editProduct",
+  async (editedProduct, id) => {
+    const response = await axios.put(
+      `http://localhost:4000/product/${id}`,
+      editedProduct
+    );
+    return response.data;
+  }
+);
+
+export const deleteProduct = createAsyncThunk(
+  "products/deleteProduct",
+  async (id) => {
+    const response = await axios.delete(`http://localhost:4000/product/${id}`);
     return response.data;
   }
 );
@@ -42,6 +55,8 @@ const productsSlice = createSlice({
     productsStatus: "null",
     productDetailStatus: "null",
     productAddStatus: "null",
+    editProductStatus: "null",
+    deleteProductStatus: "null",
   },
   extraReducers: {
     [getAllProducts.pending]: (state, action) => {
@@ -74,6 +89,25 @@ const productsSlice = createSlice({
     },
     [addNewProduct.rejected]: (state) => {
       state.productAddStatus = "failed";
+    },
+    [editProduct.pending]: (state) => {
+      state.editProductStatus = "loading";
+    },
+    [editProduct.fulfilled]: (state) => {
+      state.editProductStatus = "success";
+    },
+    [editProduct.rejected]: (state) => {
+      state.editProductStatus = "failed";
+    },
+
+    [deleteProduct.pending]: (state) => {
+      state.deleteProductStatus = "loading";
+    },
+    [deleteProduct.fulfilled]: (state) => {
+      state.deleteProductStatus = "success";
+    },
+    [deleteProduct.rejected]: (state) => {
+      state.deleteProductStatus = "failed";
     },
   },
 });

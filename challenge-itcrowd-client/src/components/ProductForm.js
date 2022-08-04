@@ -29,9 +29,7 @@ export default function ProductForm() {
 
   const [errors, setErrors] = useState({});
 
-  console.log(inputs);
-
-  const handleSubmit = (e) => {
+   const handleSubmit = (e) => {
     e.preventDefault();
     const validInputs = {
         ...inputs,
@@ -41,7 +39,6 @@ export default function ProductForm() {
     console.log("submit");
   };
 
-  console.log(brands);
   const handleChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
     setErrors(validateProduct(inputs));
