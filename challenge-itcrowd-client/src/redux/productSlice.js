@@ -17,6 +17,23 @@ export const getProductDetail = createAsyncThunk(
   }
 );
 
+export const addNewProduct = createAsyncThunk(
+  "products/addNewProduct",
+  async (newProduct) => {
+    // const validProduct = {
+    //   ...newProduct,
+    //   price: parseInt(newProduct.price),
+    //   brand: "62eb3ebfa77da662b0aa6cff",
+    // };
+
+    const response = await axios.post(
+      `http://localhost:4000/product/`,
+      newProduct
+    );
+    return response.data;
+  }
+);
+
 const productsSlice = createSlice({
   name: "products",
   initialState: {
@@ -24,6 +41,7 @@ const productsSlice = createSlice({
     productDetail: {},
     productsStatus: "null",
     productDetailStatus: "null",
+    productAddStatus: "null",
   },
   extraReducers: {
     [getAllProducts.pending]: (state, action) => {
@@ -46,6 +64,16 @@ const productsSlice = createSlice({
     },
     [getProductDetail.rejected]: (state, action) => {
       state.productDetailStatus = "failed";
+    },
+
+    [addNewProduct.pending]: (state) => {
+      state.productAddStatus = "loading";
+    },
+    [addNewProduct.fulfilled]: (state) => {
+      state.productAddStatus = "success";
+    },
+    [addNewProduct.rejected]: (state) => {
+      state.productAddStatus = "failed";
     },
   },
 });

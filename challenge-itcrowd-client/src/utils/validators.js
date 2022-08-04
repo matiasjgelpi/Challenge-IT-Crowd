@@ -20,6 +20,10 @@ export const validateProduct = (inputs) => {
     errors.price = "Price is required";
   }
 
+  if (!inputs.brand) {
+    errors.brand = "Brand is required";
+  }
+
   if (!inputs.description) {
     errors.description = "Description is required";
   }

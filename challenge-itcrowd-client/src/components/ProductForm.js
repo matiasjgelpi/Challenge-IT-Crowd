@@ -6,30 +6,42 @@ import {
   FormHelperText,
   InputLabel,
   OutlinedInput,
+  Select,
+  MenuItem,
 } from "@mui/material";
-// import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { addNewProduct } from "../redux/productSlice";
+import { getAllBrands } from "../redux/brandSlice";
 import { validateProduct } from "../utils/validators";
 
 export default function ProductForm() {
-  //   let products = useSelector((state) => state.products.products);
-  //   const dispatch = useDispatch();
+  let brands = useSelector((state) => state.brands.brands);
+  const dispatch = useDispatch();
 
   const [inputs, setInputs] = useState({
     name: "",
     image_url: "",
     price: "",
+    brand: "",
     description: "",
   });
 
   const [errors, setErrors] = useState({});
 
+  console.log(inputs);
+
   const handleSubmit = (e) => {
-    e?.preventDefault();
+    e.preventDefault();
+    const validInputs = {
+        ...inputs,
+        price: parseFloat(inputs.price),
+    }
+    dispatch(addNewProduct(validInputs));
     console.log("submit");
   };
 
-  console.log(inputs);
+  console.log(brands);
   const handleChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
     setErrors(validateProduct(inputs));
@@ -39,10 +51,14 @@ export default function ProductForm() {
     setErrors(validateProduct(inputs));
   }, [setErrors, inputs]);
 
+  useEffect(() => {
+    dispatch(getAllBrands());
+  }, []);
+
   return (
     <Box
       component="form"
-      onSubmit={handleSubmit()}
+      onSubmit={handleSubmit}
       sx={{
         maxWidth: "75vw",
         display: "flex",
@@ -87,6 +103,31 @@ export default function ProductForm() {
         onChange={handleChange}
       />
 
+      <FormControl error={errors?.brand !== undefined} fullWidth>
+        <InputLabel variant="outlined" htmlFor="description">
+          Brand
+        </InputLabel>
+        <Select
+        label="Brand"
+        name="brand"
+        value={inputs.brand}
+        onChange={handleChange}
+        
+
+        >
+          {brands?.map((brand) => {
+            return (
+              <MenuItem key={brand.id} value={brand.id}>
+                {brand.name}
+              </MenuItem>
+            );
+          })}
+        </Select>
+        <FormHelperText variant="outlined">
+          {errors?.brand && errors?.brand}
+        </FormHelperText>
+      </FormControl>
+
       <FormControl error={errors?.description !== undefined} fullWidth>
         <InputLabel variant="outlined" htmlFor="description">
           Description
@@ -103,12 +144,14 @@ export default function ProductForm() {
           {errors?.description && errors?.description}
         </FormHelperText>
       </FormControl>
+
       <Button
         variant="contained"
         size="small"
         sx={{ width: "15%" }}
-        onClick={(e) => handleSubmit(e)}
+        // onClick={(e) => handleSubmit(e)}
         disabled={errors.isValid}
+        type="submit"
       >
         Add Product
       </Button>
@@ -116,7 +159,7 @@ export default function ProductForm() {
         variant="contained"
         size="small"
         sx={{ width: "15%" }}
-        onClick={(e) => handleSubmit(e)}
+        // onClick={(e) => handleSubmit(e)}
         disabled={errors.isValid}
       >
         Edit Product

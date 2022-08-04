@@ -14,7 +14,7 @@ export default function BrandForm() {
   const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
-    e?.preventDefault();
+    e.preventDefault();
     console.log("submit");
   };
 
@@ -31,7 +31,7 @@ export default function BrandForm() {
   return (
     <Box
       component="form"
-      onSubmit={handleSubmit()}
+      onSubmit={handleSubmit}
       sx={{
         maxWidth: "75vw",
         display: "flex",
@@ -57,9 +57,9 @@ export default function BrandForm() {
         error={errors?.logo_url !== undefined}
         helperText={errors?.logo_url && errors?.logo_url}
         variant="outlined"
-        label="Image logo"
+        label="Logo URL"
         margin="normal"
-        value={inputs.image_logo}
+        value={inputs.logo_url}
         onChange={handleChange}
       />
 
@@ -67,7 +67,7 @@ export default function BrandForm() {
         variant="contained"
         size="small"
         sx={{ width: "20%" }}
-        onClick={(e) => handleSubmit(e)}
+        // onClick={(e) => handleSubmit(e)}
         disabled={errors.isValid}
       >
         Add Brand
@@ -76,7 +76,7 @@ export default function BrandForm() {
         variant="contained"
         size="small"
         sx={{ width: "20%" }}
-        onClick={(e) => handleSubmit(e)}
+        // onClick={(e) => handleSubmit(e)}
         disabled={errors.isValid}
       >
         Edit Brand
