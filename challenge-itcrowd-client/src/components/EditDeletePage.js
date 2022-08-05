@@ -1,11 +1,9 @@
 import {
   Button,
   Box,
-  TextField,
   FormControl,
   FormHelperText,
   InputLabel,
-  OutlinedInput,
   Select,
   MenuItem,
 } from "@mui/material";
@@ -14,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllBrands, deleteBrand } from "../redux/brandSlice";
 import { getAllProducts, deleteProduct } from "../redux/productSlice";
-import { maxHeight } from "@mui/system";
 
 export default function EditDeletePage() {
   let brands = useSelector((state) => state.brands.brands);

@@ -3,6 +3,8 @@ import ProductForm from "./ProductForm";
 import BrandForm from "./BrandForm";
 import { useLocation, useNavigate } from "react-router-dom";
 import EditDeletePage from "./EditDeletePage";
+import EditBrandDetail from "./EditBrandDetail";
+import EditProductDetail from "./EditProductDetail";
 
 export default function AdminPage() {
   const navItems = ["Edit / Delete", "Add Product", "Add Brand"];
@@ -63,6 +65,8 @@ export default function AdminPage() {
         {location.pathname === "/admin/Edit/Delete" && <EditDeletePage />}
         {location.pathname === "/admin/AddProduct" && <ProductForm />}
         {location.pathname === "/admin/AddBrand" && <BrandForm />}
+        {location.pathname.includes ("/admin/Edit/Delete/EditBrand/") && <EditBrandDetail />}
+        {location.pathname.includes ("/admin/Edit/Delete/EditProduct/") && <EditProductDetail />}
       </Box>
 
       {/* <ProductForm />

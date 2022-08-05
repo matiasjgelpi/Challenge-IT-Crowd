@@ -50,7 +50,7 @@ export default function ProductForm() {
 
   useEffect(() => {
     dispatch(getAllBrands());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Box
