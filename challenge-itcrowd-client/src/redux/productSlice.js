@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 export const getAllProducts = createAsyncThunk(
@@ -20,30 +21,77 @@ export const getProductDetail = createAsyncThunk(
 export const addNewProduct = createAsyncThunk(
   "products/addNewProduct",
   async (newProduct) => {
-    const response = await axios.post(
-      `http://localhost:4000/product/`,
-      newProduct
-    );
-    return response.data;
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/product/`,
+        newProduct
+      );
+      Swal.fire({
+        title: "Success",
+        text: response.data.msg,
+        icon: "success",
+      }).then(() => {
+        window.location.reload();
+      });
+      return response.data;
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: error.response.data.msg,
+        icon: "error",
+      });
+    }
   }
 );
 
 export const editProduct = createAsyncThunk(
   "products/editProduct",
   async (editedProduct, id) => {
-    const response = await axios.put(
-      `http://localhost:4000/product/${id}`,
-      editedProduct
-    );
-    return response.data;
+    try {
+      const response = await axios.put(
+        `http://localhost:4000/product/${id}`,
+        editedProduct
+      );
+      Swal.fire({
+        title: "Success",
+        text: response.data.msg,
+        icon: "success",
+      }).then(() => {
+        window.location.reload();
+      });
+      return response.data;
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: error.response.data.msg,
+        icon: "error",
+      });
+    }
   }
 );
 
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async (id) => {
-    const response = await axios.delete(`http://localhost:4000/product/${id}`);
-    return response.data;
+    try {
+      const response = await axios.delete(
+        `http://localhost:4000/product/${id}`
+      );
+      Swal.fire({
+        title: "Success",
+        text: response.data.msg,
+        icon: "success",
+      }).then(() => {
+        window.location.reload();
+      });
+      return response.data;
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: error.response.data.msg,
+        icon: "error",
+      });
+    }
   }
 );
 

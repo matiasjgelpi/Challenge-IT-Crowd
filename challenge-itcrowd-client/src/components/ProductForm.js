@@ -144,7 +144,7 @@ export default function ProductForm() {
         variant="contained"
         size="small"
         sx={{ width: "15%" }}
-        // onClick={(e) => handleSubmit(e)}
+        onClick={handleSubmit}
         disabled={errors.isValid}
         type="submit"
       >
@@ -154,7 +154,7 @@ export default function ProductForm() {
         variant="contained"
         size="small"
         sx={{ width: "15%" }}
-        // onClick={(e) => handleSubmit(e)}
+        // onClick={handleSubmit}
         disabled={errors.isValid}
       >
         Edit Product

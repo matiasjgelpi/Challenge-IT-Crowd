@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 export const getAllBrands = createAsyncThunk(
@@ -20,25 +21,73 @@ export const getBrandDetail = createAsyncThunk(
 export const addNewBrand = createAsyncThunk(
   "brand/addNewBrand",
   async (newBrand) => {
-    const response = await axios.post(`http://localhost:4000/brand/`, newBrand);
-    return response.data;
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/brand/`,
+        newBrand
+      );
+      Swal.fire({
+        title: "Success",
+        text: response.data.msg,
+        icon: "success",
+      }).then(() => {
+        window.location.reload();
+      });
+      return response.data;
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: error.response.data.msg,
+        icon: "error",
+      });
+    }
   }
 );
 
 export const editBrand = createAsyncThunk(
   "brand/editBrand",
   async (editedBrand, id) => {
-    const response = await axios.put(
-      `http://localhost:4000/brand/${id}`,
-      editedBrand
-    );
-    return response.data;
+    try {
+      const response = await axios.put(
+        `http://localhost:4000/brand/${id}`,
+        editedBrand
+      );
+      Swal.fire({
+        title: "Success",
+        text: response.data.msg,
+        icon: "success",
+      }).then(() => {
+        window.location.reload();
+      });
+      return response.data;
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: error.response.data.msg,
+        icon: "error",
+      });
+    }
   }
 );
 
 export const deleteBrand = createAsyncThunk("brand/deleteBrand", async (id) => {
-  const response = await axios.delete(`http://localhost:4000/brand/${id}`);
-  return response.data;
+  try {
+    const response = await axios.delete(`http://localhost:4000/brand/${id}`);
+    Swal.fire({
+      title: "Success",
+      text: response.data.msg,
+      icon: "success",
+    }).then(() => {
+      window.location.reload();
+    });
+    return response.data;
+  } catch (error) {
+    Swal.fire({
+      title: "Error",
+      text: error.response.data.msg,
+      icon: "error",
+    });
+  }
 });
 
 const brandSlice = createSlice({

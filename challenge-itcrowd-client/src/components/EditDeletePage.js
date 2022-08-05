@@ -7,15 +7,18 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Component } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 import { getAllBrands, deleteBrand } from "../redux/brandSlice";
 import { getAllProducts, deleteProduct } from "../redux/productSlice";
 
 export default function EditDeletePage() {
   let brands = useSelector((state) => state.brands.brands);
   let products = useSelector((state) => state.products.products);
+  let deleteStatus = useSelector((state) => state.products.deleteStatus);
+
 
   const dispatch = useDispatch();
 
@@ -28,24 +31,38 @@ export default function EditDeletePage() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(getAllBrands());
-    dispatch(getAllProducts());
-  }, [dispatch]);
-
   const handleChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
     // setErrors(validateProduct(inputs));
   };
 
   const handleDelete = (e) => {
-    if (e.target.name === "brand") {
-      console.log("delete brand");
-      dispatch(deleteBrand(inputs.brand));
-    }
-    if (e.target.name === "product") {
-      dispatch(deleteProduct(inputs.product));
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      showConfirmButton: true,
+    }).then((result) => {
+      if (result.value) {
+        if (e.target.name === "brand") {
+          dispatch(deleteBrand(inputs.brand));
+        } else if (e.target.name === "product") {
+          dispatch(deleteProduct(inputs.product));
+        }
+
+        setInputs({
+          brand: "",
+          product: "",
+        })
+        
+     
+      } else {
+        Swal.close();
+      }
+    })
+    
+       
   };
 
   const handleEdit = (e) => {
@@ -56,6 +73,11 @@ export default function EditDeletePage() {
       navigate(`EditProduct/${inputs.product}`);
     }
   };
+
+  useEffect(() => {
+    dispatch(getAllBrands());
+    dispatch(getAllProducts());
+  }, [dispatch]);
 
   return (
     <Box

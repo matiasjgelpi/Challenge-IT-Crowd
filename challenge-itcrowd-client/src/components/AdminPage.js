@@ -9,13 +9,12 @@ import EditProductDetail from "./EditProductDetail";
 export default function AdminPage() {
   const navItems = ["Edit / Delete", "Add Product", "Add Brand"];
   const location = useLocation();
-  const navigator = useNavigate();
+  const navigate = useNavigate();
 
-  console.log(location);
 
   const handleClick = (item) => {
     const routeItem = item.split(" ").join("");
-    navigator(`/admin/${routeItem}`);
+    navigate(`/admin/${routeItem}`);
   };
 
   return (
