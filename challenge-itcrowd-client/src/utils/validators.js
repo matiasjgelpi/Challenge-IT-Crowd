@@ -11,7 +11,7 @@ export const validateProduct = (inputs, edit) => {
   } else if (
     !/[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)?/gi.test(
       inputs?.image_url
-    )
+    ) && inputs.image_url
   ) {
     errors.image_url = "Image Url is not valid";
   }
@@ -50,7 +50,7 @@ export const validateBrand = (inputs, edit) => {
   } else if (
     !/[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)?/gi.test(
       inputs?.logo_url
-    )
+    ) && inputs.logo_url
   ) {
     errors.logo_url = "Image Url is not valid";
   }

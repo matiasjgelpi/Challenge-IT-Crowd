@@ -3,11 +3,11 @@ import { Button, Box, TextField } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { validateBrand } from "../utils/validators";
 import { useLocation } from "react-router-dom";
-import { addNewBrand } from "../redux/brandSlice";
+import { addNewBrand, editBrand } from "../redux/brandSlice";
 
-export default function BrandForm({edit}) {
-  
+export default function BrandForm({ edit, id }) {
   const dispatch = useDispatch();
+
 
   const [inputs, setInputs] = useState({
     name: "",
@@ -19,7 +19,25 @@ export default function BrandForm({edit}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addNewBrand(inputs));
+    if (e.target.name === "edit") {
+      
+      const editedBrand = {
+        ...inputs,
+        id: id,
+
+      }
+
+      for (let key in editedBrand) {
+        if (editedBrand[key] === "") {
+          delete editedBrand[key];
+        }
+      }
+      console.log(editedBrand);
+    
+      dispatch(editBrand(editedBrand));
+    } else {
+      dispatch(addNewBrand(inputs));
+    }
     console.log("submit");
   };
 
@@ -29,7 +47,7 @@ export default function BrandForm({edit}) {
   };
 
   useEffect(() => {
-    setErrors(validateBrand(inputs,edit));
+    setErrors(validateBrand(inputs, edit));
   }, [setErrors, inputs, edit]);
 
   return (
@@ -84,8 +102,9 @@ export default function BrandForm({edit}) {
           variant="contained"
           size="small"
           sx={{ width: "20%" }}
-          // onClick={(e) => handleSubmit(e)}
-          disabled={errors.isValid}
+          name="edit"
+          onClick={handleSubmit}
+          disabled={errors.isValid || (inputs.name === "" && inputs.logo_url === "")}
         >
           Edit Brand
         </Button>

@@ -10,9 +10,12 @@ export default function EditBrandDetail() {
   const dispatch = useDispatch();
   const brand = useSelector((state) => state.brands.brandDetail);
 
+  console.log(brand.id);
+  
+
   useEffect(() => {
     dispatch(getBrandDetail(id));
-  });
+  },[dispatch, id]);
 
   return (
     
@@ -74,7 +77,7 @@ export default function EditBrandDetail() {
           width: "45%",
         }}
       >
-        <BrandForm edit={"edit"} />
+        <BrandForm edit={"edit"} id={brand.id} />
       </Box>
     </Box>
   );
