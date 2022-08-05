@@ -1,11 +1,13 @@
-import './App.css';
-import MainPage from './components/MainPage';
-import ProductDetail from './components/ProductDetail';
-import NavBar from './components/NavBar';
-import Footer from './components/Footer';
-import PageNotFound from './components/PageNotFound';
-import AdminPage from './components/AdminPage';
-import { Routes, Route} from 'react-router-dom';
+import "./App.css";
+import MainPage from "./components/MainPage";
+import ProductDetail from "./components/ProductDetail";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import PageNotFound from "./components/PageNotFound";
+import AdminPage from "./components/AdminPage";
+import EditBrandDetail from "./components/EditBrandDetail";
+import EditProductDetail from "./components/EditProductDetail";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -15,8 +17,10 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="detail/:id" element={<ProductDetail />} />
         <Route path="admin/Edit/Delete" element={<AdminPage />} />
-        <Route path="admin/AddProduct" element={<AdminPage />}/>
-        <Route path="admin/AddBrand" element={<AdminPage />}/>
+        <Route path="admin/AddProduct" element={<AdminPage />} />
+        <Route path="admin/AddBrand" element={<AdminPage />} />
+        <Route path="admin/Edit/Delete/EditBrand/:id" element={<EditBrandDetail />} />
+        <Route path="admin/Edit/Delete/EditProduct/:id" element={<EditProductDetail />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer></Footer>

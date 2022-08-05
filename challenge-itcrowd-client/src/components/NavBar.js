@@ -6,20 +6,32 @@ export default function NavBar() {
     <AppBar
       sx={{
         backgroundColor: "pink",
-        padding: "5px",
-
+        padding: "1rem",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        
       }}
       color="secondary"
       position="static"
     >
-      {/* <Toolbar>
-            <h1>Itcrowd</h1>
-        </Toolbar> */}
-      <Link style={{
-        textDecoration: "none",
-        color: "white",
-      }} to="/">
+     
+      <Link
+        style={{
+          textDecoration: "none",
+          color: "white",
+        }}
+        to="/"
+      >
         <h1>Itcrowd cellphones</h1>
+      </Link>
+      <Link
+        style={{
+          textDecoration: "none",
+          color: "white",
+        }}
+        to="admin/Edit/Delete"
+      >
+        <h1>Admin</h1>
       </Link>
     </AppBar>
   );
