@@ -10,7 +10,7 @@ export default function MainPage() {
 
   useEffect(() => {
     dispatch(getAllProducts());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Paper

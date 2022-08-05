@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   Button,
   Box,
@@ -10,7 +11,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { addNewProduct } from "../redux/productSlice";
 import { getAllBrands } from "../redux/brandSlice";
 import { validateProduct } from "../utils/validators";
@@ -18,6 +19,8 @@ import { validateProduct } from "../utils/validators";
 export default function ProductForm() {
   let brands = useSelector((state) => state.brands.brands);
   const dispatch = useDispatch();
+
+  const location = useLocation();
 
   const [inputs, setInputs] = useState({
     name: "",
@@ -29,12 +32,12 @@ export default function ProductForm() {
 
   const [errors, setErrors] = useState({});
 
-   const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const validInputs = {
-        ...inputs,
-        price: parseFloat(inputs.price),
-    }
+      ...inputs,
+      price: parseFloat(inputs.price),
+    };
     dispatch(addNewProduct(validInputs));
     console.log("submit");
   };
@@ -105,10 +108,10 @@ export default function ProductForm() {
           Brand
         </InputLabel>
         <Select
-        label="Brand"
-        name="brand"
-        value={inputs.brand}
-        onChange={handleChange}
+          label="Brand"
+          name="brand"
+          value={inputs.brand}
+          onChange={handleChange}
         >
           {brands?.map((brand) => {
             return (
@@ -139,26 +142,28 @@ export default function ProductForm() {
           {errors?.description && errors?.description}
         </FormHelperText>
       </FormControl>
-
-      <Button
-        variant="contained"
-        size="small"
-        sx={{ width: "15%" }}
-        onClick={handleSubmit}
-        disabled={errors.isValid}
-        type="submit"
-      >
-        Add Product
-      </Button>
-      <Button
-        variant="contained"
-        size="small"
-        sx={{ width: "15%" }}
-        // onClick={handleSubmit}
-        disabled={errors.isValid}
-      >
-        Edit Product
-      </Button>
+      {location.pathname === "admin/addProduct" ? (
+        <Button
+          variant="contained"
+          size="small"
+          sx={{ width: "15%" }}
+          onClick={handleSubmit}
+          disabled={errors.isValid}
+          type="submit"
+        >
+          Add Product
+        </Button>
+      ) : (
+        <Button
+          variant="contained"
+          size="small"
+          sx={{ width: "15%" }}
+          // onClick={handleSubmit}
+          disabled={errors.isValid}
+        >
+          Edit Product
+        </Button>
+      )}
     </Box>
   );
 }
