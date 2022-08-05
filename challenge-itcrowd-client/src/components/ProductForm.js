@@ -20,7 +20,6 @@ export default function ProductForm({edit}) {
   let brands = useSelector((state) => state.brands.brands);
   const dispatch = useDispatch();
 
-console.log(edit);
 
   const location = useLocation();
 
@@ -32,7 +31,6 @@ console.log(edit);
     description: "",
   });
 
-  console.log(location)
   const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
@@ -42,7 +40,6 @@ console.log(edit);
       price: parseFloat(inputs.price),
     };
     dispatch(addNewProduct(validInputs,edit));
-    console.log("submit");
   };
 
   const handleChange = (e) => {

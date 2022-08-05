@@ -29,7 +29,6 @@ export default function EditDeletePage() {
 
   const handleChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
-    // setErrors(validateProduct(inputs));
   };
 
   const handleDelete = (e) => {
