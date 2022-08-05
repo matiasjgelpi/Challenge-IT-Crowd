@@ -16,9 +16,11 @@ import { addNewProduct } from "../redux/productSlice";
 import { getAllBrands } from "../redux/brandSlice";
 import { validateProduct } from "../utils/validators";
 
-export default function ProductForm() {
+export default function ProductForm({edit}) {
   let brands = useSelector((state) => state.brands.brands);
   const dispatch = useDispatch();
+
+console.log(edit);
 
   const location = useLocation();
 
@@ -30,6 +32,7 @@ export default function ProductForm() {
     description: "",
   });
 
+  console.log(location)
   const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
@@ -38,7 +41,7 @@ export default function ProductForm() {
       ...inputs,
       price: parseFloat(inputs.price),
     };
-    dispatch(addNewProduct(validInputs));
+    dispatch(addNewProduct(validInputs,edit));
     console.log("submit");
   };
 
@@ -48,8 +51,8 @@ export default function ProductForm() {
   };
 
   useEffect(() => {
-    setErrors(validateProduct(inputs));
-  }, [setErrors, inputs]);
+    setErrors(validateProduct(inputs,edit));
+  }, [setErrors, inputs, edit]);
 
   useEffect(() => {
     dispatch(getAllBrands());
@@ -142,7 +145,7 @@ export default function ProductForm() {
           {errors?.description && errors?.description}
         </FormHelperText>
       </FormControl>
-      {location.pathname === "admin/addProduct" ? (
+      {location.pathname === "/admin/AddProduct" ? (
         <Button
           variant="contained"
           size="small"

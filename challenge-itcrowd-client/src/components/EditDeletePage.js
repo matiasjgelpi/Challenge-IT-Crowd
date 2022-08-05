@@ -7,7 +7,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { useState, useEffect, Component } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
@@ -17,8 +17,6 @@ import { getAllProducts, deleteProduct } from "../redux/productSlice";
 export default function EditDeletePage() {
   let brands = useSelector((state) => state.brands.brands);
   let products = useSelector((state) => state.products.products);
-  let deleteStatus = useSelector((state) => state.products.deleteStatus);
-
 
   const dispatch = useDispatch();
 
@@ -26,8 +24,6 @@ export default function EditDeletePage() {
     brand: "",
     product: "",
   });
-
-  const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
 
@@ -54,15 +50,11 @@ export default function EditDeletePage() {
         setInputs({
           brand: "",
           product: "",
-        })
-        
-     
+        });
       } else {
         Swal.close();
       }
-    })
-    
-       
+    });
   };
 
   const handleEdit = (e) => {
@@ -93,7 +85,7 @@ export default function EditDeletePage() {
           gap: "1rem",
         }}
       >
-        <FormControl error={errors?.brand !== undefined} fullWidth>
+        <FormControl fullWidth>
           <InputLabel variant="outlined" htmlFor="description">
             Brands
           </InputLabel>
@@ -150,7 +142,7 @@ export default function EditDeletePage() {
           gap: "1rem",
         }}
       >
-        <FormControl error={errors?.brand !== undefined} fullWidth>
+        <FormControl fullWidth>
           <InputLabel variant="outlined" htmlFor="description">
             Products
           </InputLabel>

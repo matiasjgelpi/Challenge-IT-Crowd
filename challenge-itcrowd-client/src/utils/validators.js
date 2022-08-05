@@ -1,12 +1,12 @@
-export const validateProduct = (inputs) => {
+export const validateProduct = (inputs, edit) => {
   const errors = {};
-  if (!inputs.name) {
+  if (!inputs.name && !edit) {
     errors.name = "Original title is required";
   } else if (inputs?.name.indexOf(" ") === 0) {
     errors.name = "No empty spaces allowed";
   }
 
-  if (!inputs.image_url) {
+  if (!inputs.image_url && !edit) {
     errors.image_url = "Image URL is required";
   } else if (
     !/[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)?/gi.test(
@@ -16,15 +16,15 @@ export const validateProduct = (inputs) => {
     errors.image_url = "Image Url is not valid";
   }
 
-  if (!inputs.price) {
+  if (!inputs.price && !edit) {
     errors.price = "Price is required";
   }
 
-  if (!inputs.brand) {
+  if (!inputs.brand && !edit) {
     errors.brand = "Brand is required";
   }
 
-  if (!inputs.description) {
+  if (!inputs.description && !edit) {
     errors.description = "Description is required";
   }
 
@@ -37,15 +37,15 @@ export const validateProduct = (inputs) => {
   return errors;
 };
 
-export const validateBrand = (inputs) => {
+export const validateBrand = (inputs, edit) => {
   const errors = {};
-  if (!inputs.name) {
-    errors.name = "Original title is required";
+  if (!inputs.name && !edit) {
+    errors.name = "Name is required";
   } else if (inputs?.name.indexOf(" ") === 0) {
     errors.name = "No empty spaces allowed";
   }
 
-  if (!inputs.logo_url) {
+  if (!inputs.logo_url && !edit) {
     errors.logo_url = "Image URL is required";
   } else if (
     !/[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)?/gi.test(

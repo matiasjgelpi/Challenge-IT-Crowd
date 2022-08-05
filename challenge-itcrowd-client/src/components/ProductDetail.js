@@ -11,7 +11,7 @@ export default function ProductDetail() {
 
   useEffect(() => {
     dispatch(getProductDetail(id));
-  }, [])
+  }, [dispatch, id]);
 
   return (
     <Paper

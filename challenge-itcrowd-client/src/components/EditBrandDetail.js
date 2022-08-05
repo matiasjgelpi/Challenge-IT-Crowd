@@ -74,7 +74,7 @@ export default function EditBrandDetail() {
           width: "45%",
         }}
       >
-        <BrandForm id={id} />
+        <BrandForm edit={"edit"} />
       </Box>
     </Box>
   );

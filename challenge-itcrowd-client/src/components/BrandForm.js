@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Button, Box, TextField } from "@mui/material";
-// import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { validateBrand } from "../utils/validators";
 import { useLocation } from "react-router-dom";
+import { addNewBrand } from "../redux/brandSlice";
 
-export default function BrandForm() {
-  //   let products = useSelector((state) => state.products.products);
-  //   const dispatch = useDispatch();
+export default function BrandForm({edit}) {
+  
+  const dispatch = useDispatch();
 
   const [inputs, setInputs] = useState({
     name: "",
@@ -18,17 +19,18 @@ export default function BrandForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(addNewBrand(inputs));
     console.log("submit");
   };
 
   const handleChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
-    setErrors(validateBrand(inputs));
+    setErrors(validateBrand(inputs, edit));
   };
 
   useEffect(() => {
-    setErrors(validateBrand(inputs));
-  }, [setErrors, inputs]);
+    setErrors(validateBrand(inputs,edit));
+  }, [setErrors, inputs, edit]);
 
   return (
     <Box
@@ -65,14 +67,14 @@ export default function BrandForm() {
         onChange={handleChange}
       />
 
-      {location.pathname === "admin/AddBrand" ? (
+      {location.pathname === "/admin/AddBrand" ? (
         <Button
           variant="contained"
           size="small"
           sx={{
             width: "20%",
           }}
-          // onClick={(e) => handleSubmit(e)}
+          onClick={handleSubmit}
           disabled={errors.isValid}
         >
           Add Brand

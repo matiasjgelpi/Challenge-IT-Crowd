@@ -1,4 +1,4 @@
-import { AppBar, Toolbar } from "@mui/material";
+import { AppBar } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
@@ -9,12 +9,10 @@ export default function NavBar() {
         padding: "1rem",
         flexDirection: "row",
         justifyContent: "space-between",
-        
       }}
       color="secondary"
       position="static"
     >
-     
       <Link
         style={{
           textDecoration: "none",

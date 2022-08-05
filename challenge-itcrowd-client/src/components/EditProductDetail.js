@@ -12,7 +12,7 @@ export default function EditBrandDetail() {
 
   useEffect(() => {
     dispatch(getProductDetail(id));
-  });
+  }, [dispatch, id]);
 
   return (
     <Box
@@ -44,9 +44,11 @@ export default function EditBrandDetail() {
           paddingLeft: "6rem",
         }}
       >
-        <Typography variant="h4" >Preview</Typography>
+        <Typography variant="h4">Preview</Typography>
         <Typography variant="h6">Name: {product.name}</Typography>
-        <Typography variant="h6">Brand: {product.brand?.name === null ? product.brand.name : "Not specified"}</Typography>
+        <Typography variant="h6">
+          Brand: {product.brand !== null ? product.brand.name : "Not specified"}
+        </Typography>
         <Typography variant="h6">Price: ${product.price}</Typography>
         <Typography variant="h6">
           Description:
@@ -82,7 +84,7 @@ export default function EditBrandDetail() {
           paddingBottom: "5px",
         }}
       >
-        <ProductForm id={id} />
+        <ProductForm edit={"edit"} />
       </Box>
     </Box>
   );
