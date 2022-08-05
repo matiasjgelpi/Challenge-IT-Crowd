@@ -15,6 +15,7 @@ export default function EditBrandDetail() {
   });
 
   return (
+    
     <Box
       sx={{
         maxWidth: "80vw",
@@ -24,6 +25,14 @@ export default function EditBrandDetail() {
         alignContent: "center",
       }}
     >
+      <Typography variant="h3"
+      sx={{
+        width: "100%",
+        paddingBottom: "4rem",
+        textAlign: "center",
+      }}
+      >Edit Brand</Typography>
+      
       <Box
         sx={{
           width: "45%",

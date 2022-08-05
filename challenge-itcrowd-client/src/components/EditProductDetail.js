@@ -1,7 +1,89 @@
-import React from 'react'
+import { useEffect } from "react";
+import { Box, Typography } from "@mui/material";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductDetail } from "../redux/productSlice";
+import ProductForm from "./ProductForm";
 
-export default function EditProductDetail() {
+export default function EditBrandDetail() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.products.productDetail);
+
+  useEffect(() => {
+    dispatch(getProductDetail(id));
+  });
+
   return (
-    <div>EditProductDetail</div>
-  )
+    <Box
+      sx={{
+        maxWidth: "80vw",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-around",
+        alignContent: "center",
+      }}
+    >
+      <Typography
+        variant="h3"
+        sx={{
+          width: "100%",
+          paddingBottom: "15px",
+          textAlign: "center",
+        }}
+      >
+        Edit Product
+      </Typography>
+
+      <Box
+        sx={{
+          width: "45%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+          paddingLeft: "6rem",
+        }}
+      >
+        <Typography variant="h4" >Preview</Typography>
+        <Typography variant="h6">Name: {product.name}</Typography>
+        <Typography variant="h6">Brand: {product.brand?.name === null ? product.brand.name : "Not specified"}</Typography>
+        <Typography variant="h6">Price: ${product.price}</Typography>
+        <Typography variant="h6">
+          Description:
+          <Typography variant="body1">{product.description}</Typography>
+        </Typography>
+
+        <Typography
+          variant="h6"
+          component="span"
+          sx={{
+            width: "25%",
+          }}
+        >
+          {" "}
+          Image:{" "}
+        </Typography>
+
+        <img
+          style={{
+            borderRadius: "10px",
+            width: "25%",
+            display: "inline",
+          }}
+          src={
+            "https://www.rd.com/wp-content/uploads/2021/04/GettyImages-145679137-scaled-e1619025176434.jpg?resize=2048,1365"
+          }
+          alt="kitty"
+        ></img>
+      </Box>
+      <Box
+        sx={{
+          width: "48%",
+          paddingBottom: "5px",
+        }}
+      >
+        <ProductForm id={id} />
+      </Box>
+    </Box>
+  );
 }
