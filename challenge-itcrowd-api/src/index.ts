@@ -20,8 +20,14 @@ app.use('/', (_, res) => {
   return res.status(404).send({ msg: 'resource not found' })
 })
 
-const PORT = ((process.env.PORT !== undefined) && process.env.PORT) || 3002
+const host = (process.env.HOST !== undefined && process.env.HOST) || '0.0.0.0.'
+const port =
+  (process.env.PORT !== undefined &&
+    parseInt(process.env.PORT)) ||
+    4000
 
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`)
+console.log(typeof port)
+
+app.listen(port, host, () => {
+  console.log(`Server started on port ${port}`)
 })
