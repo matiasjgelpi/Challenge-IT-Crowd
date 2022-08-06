@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Paper, Typography, Box } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { getProductDetail } from "../redux/productSlice";
+import { getProductDetail, cleanProductDetail } from "../redux/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ProductDetail() {
@@ -12,6 +12,13 @@ export default function ProductDetail() {
   useEffect(() => {
     dispatch(getProductDetail(id));
   }, [dispatch, id]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(cleanProductDetail());
+
+    }
+}, [dispatch]);
 
   return (
     <Paper

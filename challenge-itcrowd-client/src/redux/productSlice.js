@@ -123,6 +123,12 @@ const productsSlice = createSlice({
     editProductStatus: "null",
     deleteProductStatus: "null",
   },
+  reducers: {
+    cleanProductDetail: (state) => {
+      state.productDetail = {};
+    }
+  },
+
   extraReducers: {
     [getAllProducts.pending]: (state, action) => {
       state.productsStatus = "loading";
@@ -177,4 +183,5 @@ const productsSlice = createSlice({
   },
 });
 
+export const {cleanProductDetail} = productsSlice.actions;
 export default productsSlice.reducer;
