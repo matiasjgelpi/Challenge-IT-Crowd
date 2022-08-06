@@ -39,6 +39,7 @@ export default function MainPage() {
           display: "flex",
           flexWrap: "wrap",
           gap: "1rem",
+          justifyContent: "space-evenly",
         }}
       >
         {products.length > 0 ? (

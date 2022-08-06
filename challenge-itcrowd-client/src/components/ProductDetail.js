@@ -25,7 +25,7 @@ export default function ProductDetail() {
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "center",
-        alignItems: "start",
+        alignItems: "center",
         gap: "1rem",
       }}
     >
@@ -41,35 +41,35 @@ export default function ProductDetail() {
           style={{
             borderRadius: "10px",
           }}
-          width="100%"
-          src="https://www.rd.com/wp-content/uploads/2021/04/GettyImages-145679137-scaled-e1619025176434.jpg?resize=2048,1365"
+          width="85%"
+          src={product.image_url}
           alt="kitty"
         ></img>
       </Box>
       <Box
         sx={{
           width: "45%",
-          height: "45%",
-          padding: "4%",
+          height: "60%",
+          padding: "1rem",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-around",
-          alignItems: "start",
+          justifyContent: "space-evenly",
+          alignItems: "center",
+          
         }}
       >
         <img
           style={{
             borderRadius: "10px",
-            width: "25%",
+            width: "100px",
             display: "inline",
           }}
           src={product.brand?.logo_url}
           alt="kitty"
         ></img>
         <Typography variant="h6" textAlign="start" width="100%">
-          Price:<b>{product.price}</b>
+          Price:<b> ${product.price}</b>
         </Typography>
-
 
         <Typography variant="body1" textAlign="start" width="100%">
           {" "}
