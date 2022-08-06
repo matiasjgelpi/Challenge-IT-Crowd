@@ -12,14 +12,14 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { addNewProduct } from "../redux/productSlice";
+import { addNewProduct, editProduct } from "../redux/productSlice";
 import { getAllBrands } from "../redux/brandSlice";
 import { validateProduct } from "../utils/validators";
+import Swal from "sweetalert2";
 
-export default function ProductForm({edit}) {
+export default function ProductForm({ edit, id }) {
   let brands = useSelector((state) => state.brands.brands);
   const dispatch = useDispatch();
-
 
   const location = useLocation();
 
@@ -35,11 +35,42 @@ export default function ProductForm({edit}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validInputs = {
-      ...inputs,
-      price: parseFloat(inputs.price),
-    };
-    dispatch(addNewProduct(validInputs,edit));
+    const action = e.target.name === "edit" ? "edit" : "create";
+    Swal.fire({
+      title: "You want to continue?",
+      text: `You will ${action} a product!`,
+      icon: "info",
+      showCancelButton: true,
+      showConfirmButton: true,
+    }).then((result) => {
+      if (result.value) {
+        if (e.target.name !== "edit") {
+          const validInputs = {
+            ...inputs,
+            price: parseFloat(inputs.price),
+          };
+          dispatch(addNewProduct(validInputs));
+        } else {
+          const editedProduct = {
+            ...inputs,
+            id: id,
+          };
+          if (editedProduct.price !== "") {
+            editedProduct.price = parseFloat(editedProduct.price);
+          }
+
+          for (let key in editedProduct) {
+            if (editedProduct[key] === "") {
+              delete editedProduct[key];
+            }
+          }
+
+          dispatch(editProduct(editedProduct));
+        }
+      } else {
+        Swal.close();
+      }
+    });
   };
 
   const handleChange = (e) => {
@@ -48,7 +79,7 @@ export default function ProductForm({edit}) {
   };
 
   useEffect(() => {
-    setErrors(validateProduct(inputs,edit));
+    setErrors(validateProduct(inputs, edit));
   }, [setErrors, inputs, edit]);
 
   useEffect(() => {
@@ -158,8 +189,16 @@ export default function ProductForm({edit}) {
           variant="contained"
           size="small"
           sx={{ width: "15%" }}
-          // onClick={handleSubmit}
-          disabled={errors.isValid}
+          name="edit"
+          onClick={handleSubmit}
+          disabled={
+            errors.isValid ||
+            (inputs.name === "" &&
+              inputs.image_url === "" &&
+              inputs.price === "" &&
+              inputs.brand === "" &&
+              inputs.description === "")
+          }
         >
           Edit Product
         </Button>

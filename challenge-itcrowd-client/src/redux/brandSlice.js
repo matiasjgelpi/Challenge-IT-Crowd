@@ -5,16 +5,32 @@ import axios from "axios";
 export const getAllBrands = createAsyncThunk(
   "brands/getAllbrands",
   async () => {
-    const response = await axios("http://localhost:4000/brands");
-    return response.data;
+    try {
+      const response = await axios("http://localhost:4000/brands");
+      return response.data;
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: error.response.data.msg,
+        icon: "error",
+      });
+    }
   }
 );
 
 export const getBrandDetail = createAsyncThunk(
   "brands/getBrandDetail",
   async (id) => {
-    const response = await axios(`http://localhost:4000/brand/${id}`);
-    return response.data;
+    try {
+      const response = await axios(`http://localhost:4000/brand/${id}`);
+      return response.data;
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: error.response.data.msg,
+        icon: "error",
+      });
+    }
   }
 );
 

@@ -72,9 +72,7 @@ export default function EditBrandDetail() {
             width: "25%",
             display: "inline",
           }}
-          src={
-            "https://www.rd.com/wp-content/uploads/2021/04/GettyImages-145679137-scaled-e1619025176434.jpg?resize=2048,1365"
-          }
+          src={product.image_url}
           alt="kitty"
         ></img>
       </Box>
@@ -84,7 +82,7 @@ export default function EditBrandDetail() {
           paddingBottom: "5px",
         }}
       >
-        <ProductForm edit={"edit"} />
+        <ProductForm edit={"edit"} id={id} />
       </Box>
     </Box>
   );

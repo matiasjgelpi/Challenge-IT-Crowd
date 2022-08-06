@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { validateBrand } from "../utils/validators";
 import { useLocation } from "react-router-dom";
 import { addNewBrand, editBrand } from "../redux/brandSlice";
+import Swal from "sweetalert2";
 
 export default function BrandForm({ edit, id }) {
   const dispatch = useDispatch();
@@ -18,24 +19,35 @@ export default function BrandForm({ edit, id }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (e.target.name === "edit") {
-      const editedBrand = {
-        ...inputs,
-        id: id,
-      };
+    const action = e.target.name === 'edit' ? 'edit' : "create"
+    Swal.fire({
+      title: "You want to continue?",
+      text: `You will ${action} a brand!`,
+      icon: "info",
+      showCancelButton: true,
+      showConfirmButton: true,
+    }).then((result) => {
+      if (result.value) {
+        if (e.target.name === "edit") {
+          const editedBrand = {
+            ...inputs,
+            id: id,
+          };
 
-      for (let key in editedBrand) {
-        if (editedBrand[key] === "") {
-          delete editedBrand[key];
+          for (let key in editedBrand) {
+            if (editedBrand[key] === "") {
+              delete editedBrand[key];
+            }
+          }
+
+          dispatch(editBrand(editedBrand));
+        } else {
+          dispatch(addNewBrand(inputs));
         }
+      } else {
+        Swal.close();
       }
-      console.log(editedBrand);
-
-      dispatch(editBrand(editedBrand));
-    } else {
-      dispatch(addNewBrand(inputs));
-    }
-    console.log("submit");
+    });
   };
 
   const handleChange = (e) => {
