@@ -1,12 +1,19 @@
-import { Paper, Typography, Box } from "@mui/material";
+import { Paper, Typography, Box, Pagination } from "@mui/material";
 import ProductCard from "./ProductCard";
 import { getAllProducts } from "../redux/productSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function MainPage() {
   let products = useSelector((state) => state.products.products);
   const dispatch = useDispatch();
+
+  const [page, setPage] = useState(1);
+  const [productsPerPage] = useState(3);
+
+  const indexOfLastProduct = page * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const pagesTotal = Math.ceil(products.length / productsPerPage);
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -23,7 +30,9 @@ export default function MainPage() {
         padding: "0 10% 0 10%",
         display: "flex",
         flexWrap: "wrap",
+        flexDirection: "row",
         justifyContent: "center",
+        alignContent: "center",
       }}
     >
       <Typography
@@ -43,12 +52,25 @@ export default function MainPage() {
         }}
       >
         {products.length > 0 ? (
-          products?.map((product) => (
-            <ProductCard key={product.id} product={product}  />
-          ))
+          products
+            ?.slice(indexOfFirstProduct, indexOfLastProduct)
+            .map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))
         ) : (
           <h1>No products</h1>
         )}
+      </Box>
+
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "3rem",
+        }}
+      >
+        <Pagination count={pagesTotal} onChange={(e, page) => setPage(page)} />
       </Box>
     </Paper>
   );

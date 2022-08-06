@@ -6,10 +6,7 @@ import { parseIds } from '../utils/typeValidators'
 const getAllProducts = (_req: any, res: any): any => {
   void (async () => {
     try {
-      const products = await ProductModel.find({}).populate({
-        path: 'brand',
-        model: BrandModel
-      })
+      const products = await ProductModel.find({}, 'name image_url price')
       return res.send(products)
     } catch (error: any) {
       return res.status(400).send({ msg: error.toString() })
