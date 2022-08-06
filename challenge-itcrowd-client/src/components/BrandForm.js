@@ -8,7 +8,6 @@ import { addNewBrand, editBrand } from "../redux/brandSlice";
 export default function BrandForm({ edit, id }) {
   const dispatch = useDispatch();
 
-
   const [inputs, setInputs] = useState({
     name: "",
     logo_url: "",
@@ -20,12 +19,10 @@ export default function BrandForm({ edit, id }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (e.target.name === "edit") {
-      
       const editedBrand = {
         ...inputs,
         id: id,
-
-      }
+      };
 
       for (let key in editedBrand) {
         if (editedBrand[key] === "") {
@@ -33,7 +30,7 @@ export default function BrandForm({ edit, id }) {
         }
       }
       console.log(editedBrand);
-    
+
       dispatch(editBrand(editedBrand));
     } else {
       dispatch(addNewBrand(inputs));
@@ -104,7 +101,9 @@ export default function BrandForm({ edit, id }) {
           sx={{ width: "20%" }}
           name="edit"
           onClick={handleSubmit}
-          disabled={errors.isValid || (inputs.name === "" && inputs.logo_url === "")}
+          disabled={
+            errors.isValid || (inputs.name === "" && inputs.logo_url === "")
+          }
         >
           Edit Brand
         </Button>

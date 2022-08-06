@@ -8,12 +8,12 @@ import {
 } from "@mui/material";
 import { useNavigate} from "react-router-dom";
 
-export default function ProductCard({name, id}) {
+export default function ProductCard({product}) {
 
     const navigator = useNavigate();
 
     const handleClick = () => {
-        navigator(`/detail/${id}`);
+        navigator(`/detail/${product?.id}`);
         
     }
   return (
@@ -21,16 +21,19 @@ export default function ProductCard({name, id}) {
       <CardMedia
         component="img"
         height="140"
-        image="https://www.rd.com/wp-content/uploads/2021/04/GettyImages-145679137-scaled-e1619025176434.jpg?resize=2048,1365"
+        image={
+          product?.image_url?.length 
+            ? "https://www.rd.com/wp-content/uploads/2021/04/GettyImages-145679137-scaled-e1619025176434.jpg?resize=2048,1365"
+            : product.image_url
+        }
         alt="green iguana"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {name}
+          {product?.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          Price: {product?.price}
         </Typography>
       </CardContent>
       <CardActions>

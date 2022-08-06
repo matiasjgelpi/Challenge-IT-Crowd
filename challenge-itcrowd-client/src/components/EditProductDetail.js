@@ -47,7 +47,7 @@ export default function EditBrandDetail() {
         <Typography variant="h4">Preview</Typography>
         <Typography variant="h6">Name: {product.name}</Typography>
         <Typography variant="h6">
-          Brand: {product.brand !== null ? product.brand.name : "Not specified"}
+          Brand: {product.brand !== null ? product.brand?.name : "Not specified"}
         </Typography>
         <Typography variant="h6">Price: ${product.price}</Typography>
         <Typography variant="h6">

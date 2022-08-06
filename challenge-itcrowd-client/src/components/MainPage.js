@@ -43,7 +43,7 @@ export default function MainPage() {
       >
         {products.length > 0 ? (
           products?.map((product) => (
-            <ProductCard name={product?.name} id={product.id} />
+            <ProductCard product={product}  />
           ))
         ) : (
           <h1>No products</h1>

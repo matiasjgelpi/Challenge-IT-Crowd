@@ -57,15 +57,28 @@ export default function ProductDetail() {
           alignItems: "start",
         }}
       >
+        <img
+          style={{
+            borderRadius: "10px",
+            width: "25%",
+            display: "inline",
+          }}
+          src={product.brand?.logo_url}
+          alt="kitty"
+        ></img>
         <Typography variant="h6" textAlign="start" width="100%">
-          Price:<b>$$$$$</b>
+          Price:<b>{product.price}</b>
+        </Typography>
+
+
+        <Typography variant="body1" textAlign="start" width="100%">
+          {" "}
+          <b>Description:</b> {product.description}
         </Typography>
 
         <Typography variant="body1" textAlign="start" width="100%">
           {" "}
-          <b>Description:</b> lorem ipsum dolor sit amet consectetur adipisicing
-          elit. lorem ipsum dolor sit amet consectetur adipisicing elit. lorem
-          ipsum dolor sit amet consectetur adipisicing elit.{" "}
+          <b>Brand:</b> {product.brand?.name}
         </Typography>
       </Box>
     </Paper>
