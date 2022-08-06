@@ -47,6 +47,9 @@ export default function ProductDetail() {
         <img
           style={{
             borderRadius: "10px",
+          maxHeight: "500px",
+          objectFit: "contain",
+
           }}
           width="85%"
           src={product.image_url}
