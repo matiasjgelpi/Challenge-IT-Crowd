@@ -1,4 +1,4 @@
-import { Paper, Typography, Box, Pagination } from "@mui/material";
+import { Paper, Typography, Box, Pagination, CircularProgress} from "@mui/material";
 import ProductCard from "./ProductCard";
 import { getAllProducts } from "../redux/productSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -60,7 +60,7 @@ export default function MainPage() {
               <ProductCard key={product.id} product={product} />
             ))
         ) : (
-          <h1>No products</h1>
+          <CircularProgress />
         )}
       </Box>
 
