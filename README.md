@@ -60,6 +60,13 @@ Runs the API.\
 *If no one of this endpoints it's reached the API result is an error message of this type:{msg: "resource not found"}*
 
 ### Frontend:
+
+This is a SPA to display all the products available in the database and also to display the detail of these products when the user clicks the “see more” button. I use Material UI for the styles and sweetalert2 for all the user feedback. Then for the management of the global states I use redux; axios for fetching the data and Auth0 for user authentication.
+
+The application has an admin view that the user can access by only logging into the app.
+
+Here the specifications:
+
 ### Getting Started with Create React App  
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
