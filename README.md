@@ -48,7 +48,7 @@ Runs the API.\
  - GET: http://localhost:4000/product/:id : It receives a product id in the request params, in the response it send a json with the details of the product.
  - GET:http://localhost:4000/products/:brandId : It receives a brand id in the request params, In the response it send an array with all products available wich have the brand.
  - PUT: http://localhost:4000/product/:id : It receives a product id in the request params and updates the product, in the response it send a json with the updated product with the updated data.
- - DELETE: http://localhost:4000/product/:id : It receives a product id in the request params and deletes the product,  in the response it send a json with a message of this type  {"msg": "1 document deleted
+ - DELETE: http://localhost:4000/product/:id : It receives a product id in the request params and deletes the product,  in the response it send a json with a message of this type  {"msg": "1 document deleted}.
 
 ***Brand routes***
  - POST: http://localhost:4000/brand : It receives brand data in the body request and creates a product, in the response it send a json with the created brand.
