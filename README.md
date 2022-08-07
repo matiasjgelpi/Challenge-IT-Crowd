@@ -3,6 +3,10 @@
 a fullstack web app for a job application
 
 ### Backend:
+This is an API rest connected to MongoDB to manage products and brands, and the relationship between them. It is written in Typescript to help to avoid most common type errors. Basically ist an express server with helpful endpoints to reach and modify the data.
+
+Next the specifications:
+
 **Database**: MongoDB
 
 **Depedencies :** 
