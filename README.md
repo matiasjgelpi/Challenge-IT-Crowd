@@ -54,3 +54,33 @@ Runs the API.\
  - DELETE: http://localhost:4000/brand/:id : It receives a brand id in the request params and deletes the brand ,  in the response it send a json with a message of this type  {"msg": "1 document deleted}.
 
 *If no one of this endpoints it's reached the API result is an error message of this type:{msg: "resource not found"}*
+
+### Frontend:
+### Getting Started with Create React App  
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+**More Relevant Depedencies :** 
+ - @mui/material: React components that implement Google's Material Design,
+ - axios: Promise based HTTP client for the browser and node.js,
+ - react-redux: Official React bindings for Redux,
+ - @reduxjs/toolkit: The official, opinionated, batteries-included toolset for efficient Redux development,
+ - sweetalert2: A beautiful, responsive, customizable and accessible (WAI-ARIA) replacement for JavaScript's popup boxes, supported fork of sweetalert,
+ - @auth0/auth0-react: Auth0 SDK for React Single Page Applications (SPA).
+
+**Available Scripts:**
+The first step to run the client locally is to use npm install command in a terminal open in the client root directory that you can dowload from this repository.
+Then In the project directory, you can run:
+
+***npm start***
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
+
+***npm run build***
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
