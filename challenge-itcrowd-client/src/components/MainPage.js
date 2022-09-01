@@ -9,6 +9,7 @@ export default function MainPage() {
   let products = useSelector((state) => state.products.products);
   const dispatch = useDispatch();
 
+console.log(process.env.REACT_APP_GIL);
 
   const [page, setPage] = useState(1);
   const [productsPerPage] = useState(3);

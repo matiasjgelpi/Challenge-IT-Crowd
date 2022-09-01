@@ -26,3 +26,9 @@ export interface BrandUpdate {
   logo_url?: string
 
 }
+
+export interface User {
+  name: string
+  email: string
+  passwordHash: string
+}
